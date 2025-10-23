@@ -1,29 +1,8 @@
-# m3309-topalo
-frontend labs
+# Web Frontend Labs
 
-## Create Your Own Radio Station - Landing Page
+**University:** ITMO University  
+**Course:** Web Frontend Development  
+**Year:** 2025-2026  
+**Group:** M3309  
+**Student:** Topalo Budimir
 
-Лендинг страница для интенсива по созданию радиостанций
-
-### Структура проекта:
-```
-├── public/
-│   └── index.html          # Главная страница
-├── src/
-│   ├── style.css          # Стили
-│   └── script.js          # JavaScript
-└── assets/
-    └── [SVG иконки]       # Изображения
-```
-
-### Запуск:
-Откройте `public/index.html` в браузере
-
-### Секции сайта:
-1. First Screen - главный экран с призывом к действию
-2. Intensive Section - что ждёт на интенсиве
-3. Radio Info Section - информация об онлайн-радио
-4. Results Section - результаты после обучения
-5. Gift Section - бонусы и подарки
-6. Webinar Section - дата вебинара
-7. Footer - контакты и ссылки
