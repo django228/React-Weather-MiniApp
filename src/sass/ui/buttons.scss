@@ -1,0 +1,26 @@
+@use "/src/sass/base/mixins.scss" as *;
+
+.btn-default {
+	@include button;
+	width: 230px;
+	height: 50px;
+	font-size: 20px;
+}
+
+.btn-read {
+	@include button;
+	width: 120px;
+	height: 40px;
+	font-size: 14px;
+	background: transparent;
+	border: 2px solid #232323;
+	color: #232323;
+	transition: all 0.3s ease;
+	
+	&:hover {
+		background: #232323;
+		color: white;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	}
+}

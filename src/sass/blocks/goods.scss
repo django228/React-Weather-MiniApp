@@ -1,0 +1,124 @@
+@use "/src/sass/base/variables.scss" as *;
+
+.goods {
+  padding: 60px 0;
+  
+  &__heading {
+    font-size: 40px;
+    font-weight: 500;
+    
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+  }
+  
+  &__controls-items {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  &__controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  
+  &__control {
+    padding: 12px 30px;
+    background: transparent;
+    border: 1px solid $dark;
+    color: $dark;
+    font-size: $font-size-s;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    
+    &:hover {
+      background: $dark;
+      color: $light;
+    }
+    
+    &.active {
+      background: $dark;
+      color: $light;
+    }
+  }
+  
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    min-height: 300px;
+  }
+  
+  &__card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+    
+    img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+    
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+  }
+  
+  &__card-details {
+    padding: 20px;
+    
+    h3 {
+      font-size: $font-size-m;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      font-size: $font-size-s;
+      color: $dark;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .goods {
+    &__heading {
+      font-size: 32px;
+    }
+
+    &__items {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .goods {
+    &__heading {
+      font-size: 24px;
+    }
+    
+    &__items {
+      grid-template-columns: 1fr;
+    }
+    
+    &__controls {
+      flex-direction: column;
+    }
+    
+    &__control {
+      width: 100%;
+    }
+  }
+}
+
