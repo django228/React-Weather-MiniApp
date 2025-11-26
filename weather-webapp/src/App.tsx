@@ -5,7 +5,6 @@ import HeaderBar from "./components/HeaderBar/HeaderBar.tsx";
 import TodayWeather from "./components/TodayWeather/TodayWeather.tsx";
 import FiveDayForecast from "./components/FiveDayForecast/FiveDayForecast.tsx";
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher.tsx";
-import WeatherEffects from "./components/WeatherEffects/WeatherEffects.tsx";
 
 function App() {
   return (
@@ -17,8 +16,6 @@ function App() {
           </video>
           <div className="image-background" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
         </div>
-
-        <WeatherEffects />
 
         <div className="app-content">
             <HeaderBar />
