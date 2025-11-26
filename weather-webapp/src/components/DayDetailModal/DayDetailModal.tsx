@@ -15,7 +15,7 @@ interface DayDetailModalProps {
     date: Date;
 }
 
-const DayDetailModal = ({ isOpen, onClose, dayData, timezone, date }: DayDetailModalProps) => {
+const DayDetailModal = ({ isOpen, onClose, dayData, timezone }: DayDetailModalProps) => {
     const { t } = useTranslation();
 
     if (!isOpen || !dayData) {

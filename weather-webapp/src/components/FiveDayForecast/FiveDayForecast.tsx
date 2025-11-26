@@ -246,7 +246,7 @@ const FiveDayForecast = () => {
         });
     };
 
-    const handleDayClick = (dayData: typeof dailyForecast[0], dayDate: Date) => {
+    const handleDayClick = (_dayData: typeof dailyForecast[0], dayDate: Date) => {
         const dayKey = dayDate.toDateString();
         const dayItems = forecast.list.filter(item => {
             const date = new Date((item.dt + forecast.city.timezone) * 1000);
