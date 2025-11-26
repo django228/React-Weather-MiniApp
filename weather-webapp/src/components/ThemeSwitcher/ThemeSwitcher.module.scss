@@ -1,0 +1,115 @@
+.themeSwitcherWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.themeSwitcher {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.switchTrack {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    border-radius: 13px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+
+    &.light {
+        background: linear-gradient(135deg, #ffd700, #ffa500);
+    }
+
+    &.dark {
+        background: linear-gradient(135deg, #4a5568, #2d3748);
+    }
+}
+
+.switchThumb {
+    position: absolute;
+    top: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    .icon {
+        width: 14px;
+        height: 14px;
+        color: #333;
+        stroke: #333;
+    }
+
+    &.light {
+        left: 2px;
+        transform: translateX(0);
+    }
+
+    &.dark {
+        left: 26px;
+        transform: translateX(0);
+    }
+}
+
+.themeLabel {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    user-select: none;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 480px) {
+    .themeSwitcher {
+        padding: 6px 12px;
+        gap: 10px;
+    }
+
+    .switchTrack {
+        width: 45px;
+        height: 24px;
+    }
+
+    .switchThumb {
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+
+        &.dark {
+            left: 23px;
+        }
+    }
+
+    .themeLabel {
+        font-size: 12px;
+    }
+}
+

@@ -1,0 +1,27 @@
+.HeaderBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: visible;
+}
+
+@media (max-width: 768px) {
+  .HeaderBar {
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 480px) {
+  .HeaderBar {
+    gap: 6px;
+  }
+}

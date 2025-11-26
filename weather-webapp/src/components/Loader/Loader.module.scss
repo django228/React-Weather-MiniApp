@@ -1,0 +1,144 @@
+.loaderWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.loaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+}
+
+.spinner {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.cloud {
+    position: relative;
+    width: 60px;
+    height: 40px;
+    margin: 0 auto;
+}
+
+.cloudPart {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.cloudPart:nth-child(1) {
+    width: 30px;
+    height: 30px;
+    left: 0;
+    top: 10px;
+    animation-delay: 0s;
+}
+
+.cloudPart:nth-child(2) {
+    width: 40px;
+    height: 40px;
+    left: 15px;
+    top: 0;
+    animation-delay: 0.3s;
+}
+
+.cloudPart:nth-child(3) {
+    width: 30px;
+    height: 30px;
+    left: 30px;
+    top: 10px;
+    animation-delay: 0.6s;
+}
+
+.loaderMessage {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+@media (max-width: 480px) {
+    .loaderContainer {
+        padding: 24px;
+        min-width: 180px;
+    }
+
+    .loader {
+        width: 60px;
+        height: 60px;
+    }
+
+    .spinner {
+        width: 60px;
+        height: 60px;
+    }
+
+    .cloud {
+        width: 50px;
+        height: 35px;
+    }
+
+    .cloudPart:nth-child(1) {
+        width: 25px;
+        height: 25px;
+    }
+
+    .cloudPart:nth-child(2) {
+        width: 35px;
+        height: 35px;
+    }
+
+    .cloudPart:nth-child(3) {
+        width: 25px;
+        height: 25px;
+    }
+
+    .loaderMessage {
+        font-size: 14px;
+    }
+}
+

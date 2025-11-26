@@ -3,26 +3,30 @@
   display: inline-block;
   width: 100%;
   animation: gentleAppear 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  z-index: 10001;
 }
 
-// Планшеты
 @media (min-width: 480px) {
   .searchBarContainer {
-    width: 80%;
+    width: 100%;
+    flex: 1;
   }
 }
 
-// Десктоп
 @media (min-width: 768px) {
   .searchBarContainer {
-    width: 60%;
+    width: 100%;
+    flex: 1;
   }
 }
 
-// Большие экраны
 @media (min-width: 1200px) {
   .searchBarContainer {
-    width: 50%;
+    width: 100%;
+    flex: 1;
   }
 }
 
@@ -32,8 +36,8 @@
   height: 36px;
   padding: 7px 8px 7px 32px;
   border-radius: 10px;
-  font-size: 14px;
-  background: linear-gradient(135deg, rgba(46, 51, 90, 0.9), rgba(28, 27, 51, 0.85)); // добавлена прозрачность
+  font-size: 16px;
+  background: linear-gradient(135deg, rgba(46, 51, 90, 0.9), rgba(28, 27, 51, 0.85));
   box-sizing: border-box;
   color: white;
   font-weight: 400;
@@ -85,6 +89,83 @@
 
 .searchBar:focus + .searchBarIcon {
   transform: translateY(-50%) scale(1.1);
+}
+
+.suggestionsList {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, rgba(46, 51, 90, 0.95), rgba(28, 27, 51, 0.9));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 10002;
+  max-height: 300px;
+  overflow-y: auto;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.suggestionItem {
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(51, 56, 97, 0.95), rgba(33, 34, 58, 0.9));
+  }
+
+  &:active {
+    background: linear-gradient(135deg, rgba(51, 56, 97, 0.98), rgba(33, 34, 58, 0.95));
+  }
+}
+
+.suggestionCity {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.suggestionCountry {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.loadingIndicator {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(46, 51, 90, 0.95), rgba(28, 27, 51, 0.9));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  z-index: 10002;
 }
 
 @keyframes gentleAppear {

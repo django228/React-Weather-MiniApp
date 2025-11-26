@@ -1,0 +1,151 @@
+.app {
+    position: relative;
+    min-height: 100vh;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+/* Статическое изображение для больших экранов */
+.image-background {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+/* Для больших экранов - используем статическое изображение вместо видео */
+@media (min-width: 769px) {
+    .video-background video {
+        display: none;
+    }
+
+    .image-background {
+        display: block;
+    }
+}
+
+/* Затемнение фона (видео и изображения) */
+.video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(46, 51, 90, 0.3);
+    z-index: 1;
+}
+
+.app-content {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 20px;
+    padding-bottom: 100px; /* Отступ для footer */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Стили для больших экранов (ПК) */
+@media (min-width: 769px) {
+    .app-content {
+        padding: 40px;
+        padding-bottom: 120px; /* Отступ для footer на больших экранах */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    
+    .app-content > :first-child {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .app-content > :not(:first-child) {
+        width: 100%;
+        max-width: 600px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .app-content {
+        padding: 40px;
+        padding-bottom: 120px;
+        gap: 30px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .app-content {
+        padding: 60px;
+        padding-bottom: 120px;
+        gap: 40px;
+    }
+}
+
+/* Темы */
+[data-theme="light"] .video-background::after {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .video-background::after {
+    background: rgba(46, 51, 90, 0.3);
+}
+
+/* Фиксированный footer */
+.app-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .app-footer {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-footer {
+        padding: 12px;
+    }
+}

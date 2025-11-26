@@ -1,0 +1,16 @@
+.locationBadgeContainer {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.locationBadge {
+    padding-top: 10px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .locationBadge {
+        padding-top: 8px;
+    }
+}

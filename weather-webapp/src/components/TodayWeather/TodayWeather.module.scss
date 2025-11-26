@@ -1,0 +1,202 @@
+.todayWeatherWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding-top: 30px;
+    font-size: 16px;
+    margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+    .todayWeatherWrapper {
+        width: 100%;
+        max-width: 500px;
+        padding-top: 0;
+    }
+}
+
+.loading,
+.error {
+    padding: 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    min-width: 300px;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+.dateSection {
+    width: 100%;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.date {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: capitalize;
+    text-align: left;
+}
+
+.todayWeatherContainer {
+    width: 100%;
+    max-width: 600px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+    overflow: visible;
+}
+
+.todayWeatherHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.temperatureSection {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.temperature {
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+}
+
+.condition {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.iconSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weatherIcon {
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+}
+
+.todayWeatherContent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.metricCard {
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.metricIcon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
+
+.metricLabel {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+}
+
+.metricValue {
+    font-size: 14px;
+    color: white;
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .todayWeatherContainer {
+        padding: 12px;
+    }
+
+    .date {
+        font-size: 12px;
+    }
+
+    .temperature {
+        font-size: 40px;
+    }
+
+    .condition {
+        font-size: 14px;
+    }
+
+    .weatherIcon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .todayWeatherContent {
+        gap: 10px;
+    }
+
+    .metricCard {
+        padding: 10px;
+    }
+
+    .metricIcon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .metricLabel {
+        font-size: 11px;
+    }
+
+    .metricValue {
+        font-size: 12px;
+    }
+}
