@@ -18,7 +18,7 @@
 - React 18
 - TypeScript
 - Vite
-- SCSS Modules для стилизации
+- SCSS Modules
 - React i18next для интернационализации
 - OpenWeatherMap API для получения данных о погоде
 
