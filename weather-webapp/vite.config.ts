@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: process.env.VERCEL ? '/' : (process.env.NODE_ENV === 'production' ? '/React-Weather-MiniApp/' : '/'),
+  base: process.env.GITHUB_PAGES === 'true' ? '/React-Weather-MiniApp/' : '/',
 })
