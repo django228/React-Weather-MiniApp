@@ -7,6 +7,8 @@
     pointer-events: none;
     z-index: 0;
     overflow: hidden;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 /* Эффект дождя */

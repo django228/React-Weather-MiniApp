@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import type { CurrentWeather } from '../../types/weather';
 import styles from './WeatherEffects.module.scss';
 
@@ -30,23 +30,45 @@ const WeatherEffects = () => {
         };
     }, []);
 
-    if (!weather || !weather.weather || weather.weather.length === 0) {
+    const effectType = useMemo(() => {
+        if (!weather || !weather.weather || weather.weather.length === 0) {
+            return null;
+        }
+
+        const weatherMain = weather.weather[0].main.toLowerCase();
+
+        if (weatherMain === 'rain' || weatherMain === 'drizzle' || weatherMain === 'thunderstorm') {
+            return 'rain';
+        }
+        else if (weatherMain === 'snow') {
+            return 'snow';
+        }
+        else if (weatherMain === 'mist' || weatherMain === 'fog' || weatherMain === 'haze') {
+            return 'fog';
+        }
+
         return null;
-    }
+    }, [weather]);
 
-    const weatherMain = weather.weather[0].main.toLowerCase();
+    const rainDrops = useMemo(() => {
+        if (effectType !== 'rain') return [];
+        return Array.from({ length: 30 }, (_, i) => ({
+            id: i,
+            left: Math.random() * 100,
+            delay: Math.random() * 2,
+            duration: 0.5 + Math.random() * 0.5
+        }));
+    }, [effectType]);
 
-    let effectType: 'rain' | 'snow' | 'fog' | null = null;
-
-    if (weatherMain === 'rain' || weatherMain === 'drizzle' || weatherMain === 'thunderstorm') {
-        effectType = 'rain';
-    }
-    else if (weatherMain === 'snow') {
-        effectType = 'snow';
-    }
-    else if (weatherMain === 'mist' || weatherMain === 'fog' || weatherMain === 'haze') {
-        effectType = 'fog';
-    }
+    const snowflakes = useMemo(() => {
+        if (effectType !== 'snow') return [];
+        return Array.from({ length: 20 }, (_, i) => ({
+            id: i,
+            left: Math.random() * 100,
+            delay: Math.random() * 3,
+            duration: 3 + Math.random() * 2
+        }));
+    }, [effectType]);
 
     if (!effectType) {
         return null;
@@ -56,22 +78,22 @@ const WeatherEffects = () => {
         <div className={styles.weatherEffects} data-effect={effectType}>
             {effectType === 'rain' && (
                 <>
-                    {Array.from({ length: 40 }).map((_, i) => (
-                        <div key={i} className={styles.raindrop} style={{
-                            left: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 2}s`,
-                            animationDuration: `${0.5 + Math.random() * 0.5}s`
+                    {rainDrops.map((drop) => (
+                        <div key={drop.id} className={styles.raindrop} style={{
+                            left: `${drop.left}%`,
+                            animationDelay: `${drop.delay}s`,
+                            animationDuration: `${drop.duration}s`
                         }}></div>
                     ))}
                 </>
             )}
             {effectType === 'snow' && (
                 <>
-                    {Array.from({ length: 25 }).map((_, i) => (
-                        <div key={i} className={styles.snowflake} style={{
-                            left: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 3}s`,
-                            animationDuration: `${3 + Math.random() * 2}s`
+                    {snowflakes.map((flake) => (
+                        <div key={flake.id} className={styles.snowflake} style={{
+                            left: `${flake.left}%`,
+                            animationDelay: `${flake.delay}s`,
+                            animationDuration: `${flake.duration}s`
                         }}>❄</div>
                     ))}
                 </>
