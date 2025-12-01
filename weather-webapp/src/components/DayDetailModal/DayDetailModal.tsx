@@ -1,5 +1,7 @@
 import styles from './DayDetailModal.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { ForecastItem } from '../../types/weather';
 import i18n from '../../shared/configs/i18n/i18n';
 import WindIcon from '../../assets/metrics/wind-icon.svg';
@@ -17,6 +19,24 @@ interface DayDetailModalProps {
 
 const DayDetailModal = ({ isOpen, onClose, dayData, timezone }: DayDetailModalProps) => {
     const { t } = useTranslation();
+    const [units, setUnits] = useState<'metric' | 'imperial'>(() => {
+        const saved = localStorage.getItem('weather-app-units') as 'metric' | 'imperial' | null;
+        return saved || 'metric';
+    });
+
+    useEffect(() => {
+        const handleUnitsChange = () => {
+            const saved = localStorage.getItem('weather-app-units') as 'metric' | 'imperial' | null;
+            if (saved) {
+                setUnits(saved);
+            }
+        };
+
+        window.addEventListener('unitsChanged', handleUnitsChange);
+        return () => {
+            window.removeEventListener('unitsChanged', handleUnitsChange);
+        };
+    }, []);
 
     if (!isOpen || !dayData) {
         return null;
@@ -46,16 +66,33 @@ const DayDetailModal = ({ isOpen, onClose, dayData, timezone }: DayDetailModalPr
     const temperature = Math.round(dayData.main.temp);
     const feelsLike = Math.round(dayData.main.feels_like);
     const condition = dayData.weather[0]?.description || '';
-    const windSpeed = Math.round(dayData.wind.speed * 3.6);
+    const getWindSpeed = () => {
+        if (units === 'imperial') {
+            return Math.round(dayData.wind.speed * 2.237);
+        }
+        return Math.round(dayData.wind.speed * 3.6);
+    };
+    const windSpeed = getWindSpeed();
+    const getWindUnit = () => {
+        return units === 'metric' ? t('km/h') : 'mph';
+    };
     const humidity = dayData.main.humidity;
     const pressure = dayData.main.pressure;
-    const visibility = dayData.visibility 
-        ? Math.round(dayData.visibility / 1000) 
-        : null;
+    const getVisibility = () => {
+        if (!dayData.visibility) return null;
+        if (units === 'imperial') {
+            return Math.round(dayData.visibility / 1609.34);
+        }
+        return Math.round(dayData.visibility / 1000);
+    };
+    const visibility = getVisibility();
+    const getVisibilityUnit = () => {
+        return units === 'metric' ? t('km') : 'mi';
+    };
     const cloudiness = dayData.clouds.all;
     const precipitation = Math.round(dayData.pop * 100);
 
-    return (
+    return createPortal(
         <div className={styles.modalOverlay} onClick={onClose}>
             <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
                 <button className={styles.closeButton} onClick={onClose}>×</button>
@@ -85,7 +122,7 @@ const DayDetailModal = ({ isOpen, onClose, dayData, timezone }: DayDetailModalPr
                         <img src={WindIcon} alt="Wind" className={styles.metricIcon} />
                         <div className={styles.metricInfo}>
                             <div className={styles.metricLabel}>{t('Wind')}</div>
-                            <div className={styles.metricValue}>{windSpeed} {t('km/h')}</div>
+                            <div className={styles.metricValue}>{windSpeed} {getWindUnit()}</div>
                         </div>
                     </div>
                     <div className={styles.metricCard}>
@@ -107,7 +144,7 @@ const DayDetailModal = ({ isOpen, onClose, dayData, timezone }: DayDetailModalPr
                         <div className={styles.metricInfo}>
                             <div className={styles.metricLabel}>{t('Visibility')}</div>
                             <div className={styles.metricValue}>
-                                {visibility !== null ? `${visibility} ${t('km')}` : 'N/A'}
+                                {visibility !== null ? `${visibility} ${getVisibilityUnit()}` : 'N/A'}
                             </div>
                         </div>
                     </div>
@@ -127,7 +164,8 @@ const DayDetailModal = ({ isOpen, onClose, dayData, timezone }: DayDetailModalPr
                     </div>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

@@ -8,6 +8,11 @@
     padding-top: 30px;
     font-size: 16px;
     margin: 0 auto;
+    margin-bottom: 24px;
+    
+    @media (min-width: 769px) {
+        margin-bottom: 0;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -15,6 +20,7 @@
         width: 100%;
         max-width: 500px;
         padding-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -64,6 +70,10 @@
     box-sizing: border-box;
     position: relative;
     overflow: visible;
+    
+    @media (min-width: 1024px) {
+        padding: 14px;
+    }
 }
 
 .todayWeatherHeader {
@@ -88,6 +98,10 @@
     font-weight: 700;
     color: white;
     line-height: 1;
+    
+    @media (min-width: 1024px) {
+        font-size: 42px;
+    }
 }
 
 .condition {
@@ -115,6 +129,10 @@
     gap: 12px;
     width: 100%;
     box-sizing: border-box;
+    
+    @media (min-width: 1024px) {
+        gap: 10px;
+    }
 }
 
 .metricCard {

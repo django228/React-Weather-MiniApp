@@ -94,6 +94,8 @@ const useLocation = (): UseLocationReturn => {
 
             console.log('Геолокация:', { latitude: lat, longitude: lon });
 
+            localStorage.setItem('weather-app-coords', JSON.stringify({ lat, lon }));
+
             const cityName = await getCityName(lat, lon);
 
             if (cityName) {
@@ -102,8 +104,11 @@ const useLocation = (): UseLocationReturn => {
 
             if (cityName) {
                 localStorage.setItem(CITY_STORAGE_KEY, cityName);
-                window.dispatchEvent(new Event('cityUpdated'));
             }
+            
+            window.dispatchEvent(new CustomEvent('cityUpdated', { 
+                detail: { lat, lon, city: cityName } 
+            }));
             
             setLocation({
                 latitude: lat,

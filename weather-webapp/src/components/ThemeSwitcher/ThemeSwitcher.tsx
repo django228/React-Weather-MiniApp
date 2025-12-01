@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './ThemeSwitcher.module.scss';
 
 type Theme = 'light' | 'dark';
 
 const ThemeSwitcher = () => {
+    const { t } = useTranslation();
     const [theme, setTheme] = useState<Theme>(() => {
         const savedTheme = localStorage.getItem('theme') as Theme;
         return savedTheme || 'dark';
@@ -58,7 +60,7 @@ const ThemeSwitcher = () => {
                     </div>
                 </div>
                 <span className={styles.themeLabel}>
-                    {theme === 'light' ? 'Светлая' : 'Тёмная'}
+                    {theme === 'light' ? t('Light') : t('Dark')}
                 </span>
             </button>
         </div>
