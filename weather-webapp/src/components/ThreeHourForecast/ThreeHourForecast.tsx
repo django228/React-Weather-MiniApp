@@ -1,7 +1,7 @@
 import styles from './ThreeHourForecast.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
-import type { Forecast, ForecastItem } from '../../types/weather';
+import type { Forecast } from '../../types/weather';
 import { weatherApi } from '../../services/weatherService';
 import useLocation from '../../hooks/useLocation';
 import i18n from '../../shared/configs/i18n/i18n';
