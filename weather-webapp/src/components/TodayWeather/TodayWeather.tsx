@@ -20,6 +20,10 @@ const TodayWeather = () => {
     const [error, setError] = useState<string | null>(null);
     const { latitude, longitude, getLocation } = useLocation();
     const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(null);
+    const [units, setUnits] = useState<'metric' | 'imperial'>(() => {
+        const saved = localStorage.getItem('weather-app-units') as 'metric' | 'imperial' | null;
+        return saved || 'metric';
+    });
 
     useEffect(() => {
         const savedCoords = localStorage.getItem('weather-app-coords');
@@ -53,9 +57,18 @@ const TodayWeather = () => {
             }
         };
 
+        const handleUnitsChange = () => {
+            const saved = localStorage.getItem('weather-app-units') as 'metric' | 'imperial' | null;
+            if (saved) {
+                setUnits(saved);
+            }
+        };
+
         window.addEventListener('cityUpdated', handleCityUpdate);
+        window.addEventListener('unitsChanged', handleUnitsChange);
         return () => {
             window.removeEventListener('cityUpdated', handleCityUpdate);
+            window.removeEventListener('unitsChanged', handleUnitsChange);
         };
     }, []);
 
@@ -76,7 +89,7 @@ const TodayWeather = () => {
                 const currentWeather = await weatherApi.getCurrentWeather(
                     lat,
                     lon,
-                    'metric',
+                    units,
                     lang
                 );
                 setWeather(currentWeather);
@@ -95,7 +108,7 @@ const TodayWeather = () => {
         if (coords || (latitude && longitude)) {
             fetchWeather();
         }
-    }, [coords, latitude, longitude]);
+    }, [coords, latitude, longitude, units]);
 
     if (isLoading) {
         return (
@@ -123,7 +136,7 @@ const TodayWeather = () => {
                                         const currentWeather = await weatherApi.getCurrentWeather(
                                             lat,
                                             lon,
-                                            'metric',
+                                            units,
                                             lang
                                         );
                                         setWeather(currentWeather);
@@ -149,12 +162,29 @@ const TodayWeather = () => {
     const weatherIcon = weather.weather[0]?.icon;
     const temperature = Math.round(weather.main.temp);
     const condition = weather.weather[0]?.description || '';
-    const windSpeed = Math.round(weather.wind.speed * 3.6);
+    const getWindSpeed = () => {
+        if (units === 'imperial') {
+            return Math.round(weather.wind.speed * 2.237);
+        }
+        return Math.round(weather.wind.speed * 3.6);
+    };
+    const windSpeed = getWindSpeed();
+    const getWindUnit = () => {
+        return units === 'metric' ? t('km/h') : 'mph';
+    };
     const humidity = weather.main.humidity;
     const pressure = weather.main.pressure;
-    const visibility = weather.visibility 
-        ? Math.round(weather.visibility / 1000) 
-        : null;
+    const getVisibility = () => {
+        if (!weather.visibility) return null;
+        if (units === 'imperial') {
+            return Math.round(weather.visibility / 1609.34);
+        }
+        return Math.round(weather.visibility / 1000);
+    };
+    const visibility = getVisibility();
+    const getVisibilityUnit = () => {
+        return units === 'metric' ? t('km') : 'mi';
+    };
 
     const formatDate = (timestamp: number, timezone: number) => {
         const date = new Date((timestamp + timezone) * 1000);
@@ -191,7 +221,7 @@ const TodayWeather = () => {
                     <div className={styles.metricCard}>
                         <img src={WindIcon} alt="Wind" className={styles.metricIcon} />
                         <div className={styles.metricLabel}>{t('Wind')}</div>
-                        <div className={styles.metricValue}>{windSpeed} {t('km/h')}</div>
+                        <div className={styles.metricValue}>{windSpeed} {getWindUnit()}</div>
                     </div>
                     <div className={styles.metricCard}>
                         <img src={HumidityIcon} alt="Humidity" className={styles.metricIcon} />
@@ -207,7 +237,7 @@ const TodayWeather = () => {
                         <img src={VisibilityIcon} alt="Visibility" className={styles.metricIcon} />
                         <div className={styles.metricLabel}>{t('Visibility')}</div>
                         <div className={styles.metricValue}>
-                            {visibility !== null ? `${visibility} ${t('km')}` : 'N/A'}
+                            {visibility !== null ? `${visibility} ${getVisibilityUnit()}` : 'N/A'}
                         </div>
                     </div>
                 </div>

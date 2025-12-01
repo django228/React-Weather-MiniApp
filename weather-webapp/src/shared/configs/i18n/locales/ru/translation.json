@@ -12,9 +12,15 @@
     "Today": "Сегодня",
     "Tomorrow": "Завтра",
     "5-Day Forecast": "Прогноз на 5 дней",
+    "3-Hour Forecast": "Прогноз на 3 часа",
     "Feels like": "Ощущается как",
     "Cloudiness": "Облачность",
     "Precipitation": "Вероятность осадков",
     "Loading...": "Загрузка...",
-    "Loading forecast...": "Загрузка прогноза..."
+    "Loading forecast...": "Загрузка прогноза...",
+    "Celsius": "Цельсий",
+    "Fahrenheit": "Фаренгейт",
+    "Toggle units": "Переключить единицы измерения",
+    "Light": "Светлая",
+    "Dark": "Тёмная"
 }

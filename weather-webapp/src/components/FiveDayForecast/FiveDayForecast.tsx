@@ -18,6 +18,10 @@ const FiveDayForecast = () => {
     const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(null);
     const [selectedDay, setSelectedDay] = useState<{ item: ForecastItem; date: Date } | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [units, setUnits] = useState<'metric' | 'imperial'>(() => {
+        const saved = localStorage.getItem('weather-app-units') as 'metric' | 'imperial' | null;
+        return saved || 'metric';
+    });
 
     useEffect(() => {
         const savedCoords = localStorage.getItem('weather-app-coords');
@@ -28,9 +32,9 @@ const FiveDayForecast = () => {
             } catch (e) {
                 console.error('Ошибка парсинга координат:', e);
             }
-        }
-        
-        if (!savedCoords && !latitude && !longitude) {
+        } else if (latitude && longitude) {
+            setCoords({ lat: latitude, lon: longitude });
+        } else if (!latitude && !longitude) {
             setIsLoading(false);
         }
     }, [latitude, longitude]);
@@ -53,9 +57,18 @@ const FiveDayForecast = () => {
             }
         };
 
+        const handleUnitsChange = () => {
+            const saved = localStorage.getItem('weather-app-units') as 'metric' | 'imperial' | null;
+            if (saved) {
+                setUnits(saved);
+            }
+        };
+
         window.addEventListener('cityUpdated', handleCityUpdate);
+        window.addEventListener('unitsChanged', handleUnitsChange);
         return () => {
             window.removeEventListener('cityUpdated', handleCityUpdate);
+            window.removeEventListener('unitsChanged', handleUnitsChange);
         };
     }, []);
 
@@ -77,7 +90,7 @@ const FiveDayForecast = () => {
                 const forecastData = await weatherApi.getForecast(
                     lat,
                     lon,
-                    'metric',
+                    units,
                     lang
                 );
                 setForecast(forecastData);
@@ -92,7 +105,7 @@ const FiveDayForecast = () => {
         if (coords || (latitude && longitude)) {
             fetchForecast();
         }
-    }, [coords, latitude, longitude]);
+    }, [coords, latitude, longitude, units]);
 
     if (isLoading) {
         return (
@@ -120,7 +133,7 @@ const FiveDayForecast = () => {
                                         const forecastData = await weatherApi.getForecast(
                                             lat,
                                             lon,
-                                            'metric',
+                                            units,
                                             lang
                                         );
                                         setForecast(forecastData);

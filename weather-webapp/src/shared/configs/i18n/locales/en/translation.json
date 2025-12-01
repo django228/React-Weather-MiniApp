@@ -12,9 +12,15 @@
     "Today": "Today",
     "Tomorrow": "Tomorrow",
     "5-Day Forecast": "5-Day Forecast",
+    "3-Hour Forecast": "3-Hour Forecast",
     "Feels like": "Feels like",
     "Cloudiness": "Cloudiness",
     "Precipitation": "Precipitation",
     "Loading...": "Loading...",
-    "Loading forecast...": "Loading forecast..."
+    "Loading forecast...": "Loading forecast...",
+    "Celsius": "Celsius",
+    "Fahrenheit": "Fahrenheit",
+    "Toggle units": "Toggle units",
+    "Light": "Light",
+    "Dark": "Dark"
 }

@@ -13,6 +13,7 @@
     .forecastWrapper {
         width: 100%;
         padding-top: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -46,6 +47,10 @@
     display: block;
     box-sizing: border-box;
     margin: 0 auto;
+    
+    @media (min-width: 1024px) {
+        padding: 14px;
+    }
 }
 
 .forecastHeader {
@@ -58,6 +63,11 @@
     font-weight: 600;
     margin: 0 0 8px 0;
     text-align: left;
+    
+    @media (min-width: 1024px) {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
 }
 
 .forecastCity {
@@ -71,6 +81,10 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    
+    @media (min-width: 1024px) {
+        gap: 10px;
+    }
 }
 
 .forecastItem {
@@ -89,6 +103,10 @@
         background: rgba(255, 255, 255, 0.2);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    @media (min-width: 1024px) {
+        padding: 10px;
     }
 }
 
