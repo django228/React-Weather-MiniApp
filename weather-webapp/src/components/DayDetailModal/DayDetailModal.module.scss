@@ -12,11 +12,15 @@
     z-index: 10000;
     padding: 20px;
     animation: fadeIn 0.2s ease-out;
-    overflow-y: auto;
+    overflow: hidden;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    @media (min-width: 1024px) {
+        padding: 20px;
+    }
 }
 
 @keyframes fadeIn {
@@ -41,21 +45,21 @@
     padding: 24px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     animation: slideUp 0.3s ease-out;
-    margin: auto;
     flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
     .modalContent {
-        max-width: 600px;
-        padding: 32px;
+        max-width: 500px;
+        padding: 28px;
     }
 }
 
 @media (min-width: 1024px) {
     .modalContent {
-        max-width: 600px;
-        margin: auto;
+        max-width: 550px;
+        padding: 32px;
     }
 }
 
@@ -116,8 +120,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
